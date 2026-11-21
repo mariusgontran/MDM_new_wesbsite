@@ -23,10 +23,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="css/styles.css?v=client-review-2"><link rel="stylesheet" href="css/refinements.css?v=client-review-2">
+  <link rel="stylesheet" href="css/styles.css?v=web3forms-1"><link rel="stylesheet" href="css/refinements.css?v=web3forms-1">
 
   <!-- Scripts -->
-  <script defer src="js/app.js"></script>
+  <script defer src="js/app.js?v=web3forms-1"></script>
 
   <!-- Structured Schema Data (SEO) -->
   <script type="application/ld+json">
@@ -64,7 +64,7 @@
     "description": "CCTV, intercom and access control installations and servicing across Melbourne metro and regional Victoria."
 }
   </script>
-  <link rel="stylesheet" href="css/hero-map.css?v=client-review-2">
+  <link rel="stylesheet" href="css/hero-map.css?v=web3forms-1">
 </head>
 <body>
 
@@ -346,34 +346,39 @@
         <div class="glass-card" style="padding: 2.5rem;">
           <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Send us an enquiry</h3>
 
-          <p class="enquiry-note">Have a question or a project in mind? Tell us a little about what you need and how we can reach you.</p><form id="mdmContactForm">
+          <p class="enquiry-note">Have a question or a project in mind? Tell us a little about what you need and how we can reach you.</p><form id="mdmContactForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="161dd3d0-340c-499a-95a1-8bada046b168">
+            <input type="hidden" name="subject" value="New enquiry — MDM Communication website">
+            <input type="hidden" name="from_name" value="MDM Communication Website">
+            <input type="hidden" name="redirect" value="https://web3forms.com/success">
+            <input type="checkbox" name="botcheck" tabindex="-1" aria-hidden="true" style="display:none;">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div class="form-group">
                 <label class="form-label" for="contactName">Full Name *</label>
-                <input type="text" id="contactName" class="form-control" placeholder="e.g. Sarah Jenkins" required>
+                <input type="text" id="contactName" name="name" class="form-control" placeholder="e.g. Sarah Jenkins" required>
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="contactPhone">Phone Number *</label>
-                <input type="tel" id="contactPhone" class="form-control" placeholder="e.g. 0431 219 064" required>
+                <input type="tel" id="contactPhone" name="phone" class="form-control" placeholder="e.g. 0431 219 064" required>
               </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div class="form-group">
                 <label class="form-label" for="contactEmail">Email Address</label>
-                <input type="email" id="contactEmail" class="form-control" placeholder="name@example.com">
+                <input type="email" id="contactEmail" name="email" class="form-control" placeholder="name@example.com">
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="contactSuburb">Suburb / Property Address *</label>
-                <input type="text" id="contactSuburb" class="form-control" placeholder="e.g. South Yarra, VIC 3141" required>
+                <input type="text" id="contactSuburb" name="property_location" class="form-control" placeholder="e.g. South Yarra, VIC 3141" required>
               </div>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="serviceUrgency">What can we help with?</label>
-              <select id="serviceUrgency" class="form-control">
+              <select id="serviceUrgency" name="service" class="form-control">
                 <option value="quote">New System Installation / Upgrade Quote</option>
                 <option value="intercom_fault">Intercom Fault (Static Audio / Door Release Failure)</option>
                 <option value="cctv_fault">CCTV Fault (Camera Signal Drop / NVR Storage Error)</option>
@@ -384,12 +389,13 @@
 
             <div class="form-group">
               <label class="form-label" for="contactMessage">Tell us what you need</label>
-              <textarea id="contactMessage" class="form-control" placeholder="Describe your building layout, brand of existing system (e.g. Urmet, Dahua, Aiphone), or specific issue..."></textarea>
+              <textarea id="contactMessage" name="message" class="form-control" placeholder="Describe your building layout, brand of existing system (e.g. Urmet, Dahua, Aiphone), or specific issue..."></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
               <i class="fa-solid fa-paper-plane"></i> Send Enquiry
             </button>
+            <p id="formStatus" role="status" aria-live="polite" style="margin-top:1rem;" hidden></p>
           </form>
         </div>
       </div>

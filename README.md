@@ -27,7 +27,7 @@ Upload the contents of this folder as the repository root. For GitHub Pages, con
 
 ## Review status
 
-The enquiry form currently opens the visitor's email application using a `mailto:` link. Its copy reflects the planned direct website form, but website submission is not connected yet. Connect a form endpoint and implement success/error feedback before presenting it as a working direct-submission form.
+The enquiry form submits to Web3Forms using the business-supplied public access key. JavaScript shows sending, success and error feedback without leaving the page; without JavaScript, the form uses Web3Forms’ hosted success page. It includes a hidden spam-trap field. The access key is intentionally public, not a server secret. Verify delivery to the intended business inbox before launch; no live enquiry was sent during integration checks.
 
 The site loads Lato, Open Sans and JetBrains Mono through Google Fonts, and Font Awesome through a CDN. The hero headline uses Georgia. These external resources require internet access. The Melbourne map was supplied for this design; service icons and brand logos were retained from the existing project.
 

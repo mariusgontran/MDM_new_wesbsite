@@ -12,12 +12,37 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
   const header = document.querySelector('.header');
   window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
-  document.getElementById('mdmContactForm').addEventListener('submit', e => {
+  const form = document.getElementById('mdmContactForm');
+  const status = document.getElementById('formStatus');
+  const submitButton = form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    const value = id => document.getElementById(id).value.trim();
-    const select = document.getElementById('serviceUrgency');
-    const subject = 'MDM enquiry: ' + select.options[select.selectedIndex].text;
-    const body = ['Name: '+value('contactName'),'Phone: '+value('contactPhone'),'Email: '+value('contactEmail'),'Location: '+value('contactSuburb'),'','Details:',value('contactMessage')].join('\n');
-    window.location.href = 'mailto:marmiccomm@yahoo.com.au?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    if (submitButton.disabled || !form.reportValidity()) return;
+    const data = new FormData(form);
+    if (data.get('botcheck')) return;
+    data.delete('redirect');
+    const service = document.getElementById('serviceUrgency');
+    data.set('service', service.options[service.selectedIndex].text);
+    submitButton.disabled = true;
+    submitButton.setAttribute('aria-busy', 'true');
+    status.hidden = false;
+    status.style.color = 'var(--text-main)';
+    status.textContent = 'Sending your enquiry…';
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        headers: {'Accept': 'application/json'},
+        body: data
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error('Submission rejected');
+      status.textContent = 'Thank you. Your enquiry has been sent to MDM Communication.';
+      form.reset();
+    } catch (error) {
+      status.textContent = 'We couldn’t confirm your enquiry was sent. Please try again, or call 0431 219 064. Your details are still in the form.';
+    } finally {
+      submitButton.disabled = false;
+      submitButton.removeAttribute('aria-busy');
+    }
   });
 });
