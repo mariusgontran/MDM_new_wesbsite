@@ -1,0 +1,80 @@
+/* Map hero: follows the supplied MDM concept. */
+.map-hero {
+  background: #02080d;
+  padding: calc(var(--navbar-height) + 48px) 0 60px;
+  isolation: isolate;
+}
+.map-hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -2;
+  background: url('../assets/melbourne-map.png') center 52% / cover no-repeat;
+  opacity: .90;
+}
+.map-hero::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(90deg,rgba(1,8,16,.4),rgba(1,8,16,.06) 65%,rgba(1,8,16,.18)),linear-gradient(0deg,var(--bg-dark),transparent 20%);
+}
+.map-hero-layout {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7%;align-items:center}
+.hero-glass-panel {
+  padding:clamp(30px,3.5vw,54px);border-radius:24px;
+  background:rgba(8,16,24,.36);
+  backdrop-filter:blur(7px) saturate(115%);-webkit-backdrop-filter:blur(7px) saturate(115%);
+  border:1px solid rgba(206,243,255,.26);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 24px 70px rgba(0,0,0,.45);
+}
+.hero-brand-label {color:#ddf7ff;font-size:1.2rem;font-weight:600;letter-spacing:.17em;margin:0 0 25px}
+.hero-glass-panel h1 {font-family:Georgia,"Times New Roman",serif;font-size:clamp(3rem,4.8vw,4.6rem);line-height:1.15;letter-spacing:.05em;margin:0 0 24px;font-weight:400;color:#f6fcff}
+.hero-glass-panel h1 span {color:inherit}
+.hero-service-summary {color:#d0dde7;font-size:1.05rem;line-height:1.65;max-width:360px;margin:0 0 23px}
+.hero-highlights {list-style:none;padding:0;margin:0 0 30px;color:#b8cbd9;font-size:.85rem;line-height:1.6;display:grid;gap:10px}
+.hero-highlights li {position:relative;padding-left:17px}
+.hero-highlights li::before {content:"";width:4px;height:4px;border-radius:50%;background:var(--accent-cyan);position:absolute;left:0;top:.65em}
+.hero-panel-actions {display:flex;align-items:center;flex-wrap:wrap;gap:18px}
+.hero-panel-actions .btn {gap:22px;min-height:48px}
+
+.hero-service-orbits {height:570px;position:relative}
+.service-orbit {
+  width:190px;height:190px;position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border-radius:50%;color:#eafaff;text-decoration:none;background:rgba(2,11,18,.91);
+  border:1px solid rgba(0,240,255,.48);box-shadow:0 0 28px rgba(0,208,255,.09),inset 0 1px 0 rgba(255,255,255,.1);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+.service-orbit:hover {transform:translateY(-6px);border-color:var(--accent-cyan);box-shadow:0 0 38px rgba(0,240,255,.23)}
+.service-orbit img {width:65px;height:65px;object-fit:contain;margin-bottom:12px;filter:brightness(0) invert(1)}
+.service-orbit span {color:#fff;font-family:var(--font-heading);font-weight:600;font-size:1.1rem}
+.service-orbit small {font-size:.72rem;color:#9ebacb;margin-top:5px}
+.orbit-cctv {left:5%;top:0}
+.orbit-intercom {right:0;top:185px}
+.orbit-access {left:6%;bottom:0}
+[id^="service-"] {scroll-margin-top:110px}
+@media(min-width:1600px){.map-hero::before{background-size:100% auto}}
+@media(max-width:1000px){.map-hero-layout{gap:4%;grid-template-columns:1.1fr .9fr}.hero-glass-panel{padding:30px}.service-orbit{width:155px;height:155px}.service-orbit img{width:52px;height:52px}.hero-service-orbits{height:540px}.orbit-intercom{top:190px}}
+@media(max-width:700px){
+ .map-hero{padding:calc(var(--navbar-height) + 24px) 0 40px}
+ .map-hero-layout{grid-template-columns:1fr;gap:28px}
+ .hero-glass-panel{padding:30px 25px;border-radius:20px}
+ .hero-glass-panel h1{font-size:clamp(2.9rem,12vw,4rem)}
+ .hero-brand-label{font-size:1rem;margin-bottom:22px}
+ .hero-service-summary{font-size:1rem}
+ .hero-service-orbits{height:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:0 0 8px}
+ .service-orbit{position:static;width:100%;height:auto;aspect-ratio:1;border-radius:50%;padding:12px 4px}
+ .service-orbit img{width:34px;height:34px;margin-bottom:7px}
+ .service-orbit span{font-size:clamp(.6rem,2.5vw,.85rem);white-space:nowrap}
+ .service-orbit small{display:none}
+ .map-hero::before{background-position:57% center}
+}
+@media(prefers-reduced-motion:reduce){.service-orbit{transition:none}.service-orbit:hover{transform:none}}
+
+/* A subtle tonal aqua gradient gives a soft surface without raised edges. */
+.btn-primary {
+  background:linear-gradient(180deg,#12e5ee 0%,#00d7e3 100%);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 4px 16px rgba(0,220,235,.12);
+}
+.btn-primary:hover {
+  background:linear-gradient(180deg,#20e9f0 0%,#08dce6 100%);
+  filter:none;transform:translateY(-1px);
+  box-shadow:0 5px 18px rgba(0,220,235,.17);
+}
+.btn-primary:active {transform:translateY(0);box-shadow:0 2px 8px rgba(0,220,235,.1)}
+
+
